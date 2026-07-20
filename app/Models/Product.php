@@ -19,4 +19,17 @@ class Product extends Model
         'short_description',
         'status',
     ];
+    protected $appends = ['image_url'];
+    public function getImageUrlAttribute(){
+        if($this->image == ""){
+            return "";
+        }
+        return asset('/uploads/products/small/'.$this->image);
+    }
+    function product_images(){
+        return $this->hasMany(ProductImage::class);
+    }
+    function product_sizes(){
+        return $this->hasMany(ProductSize::class);
+    } 
 }
